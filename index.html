@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State Management in Vanilla JS</title>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const App = function _App() {
+  return `
+  <h1>Hello vanilla JS</h1>
+  <div>
+  Example of state management in Vanilla JS
+</div>
+<br />
+  <h1>${_App.state.count}</h1>
+  <button id='button'>Increase</button>
+  `;
+};
+
+App.state = {
+  count: 0,
+  increment: () => {
+    setState(() => App.state.count++);
+  },
+};
+
+const setState = (callback) => {
+  callback();
+  updateTree();
+};
+
+const updateTree = () => {
+  document.getElementById("app").innerHTML = App();
+  document
+    .getElementById("button")
+    .addEventListener("click", App.state.increment);
+};
+
+updateTree();
+</script>
+</html>
